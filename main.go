@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"os"
 
+	"github.com/RafaDRF/crud-go/src/controller/routes"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -15,5 +15,10 @@ func main() {
 		log.Fatal("Error on Loading File")
 	}
 
-	fmt.Println(os.Getenv("TEST"))
+	router := gin.Default()
+	routes.InitRoutes(&router.RouterGroup)
+
+	if err := router.Run(":8080"); err != nil {
+		log.Fatal(err)
+	}
 }
